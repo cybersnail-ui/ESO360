@@ -49,6 +49,8 @@
       }
 
       #video {
+        opacity: 0;
+        pointer-events: none;
         border-style: solid;
         border-color: #F5F5F5;
         background-color: #000;
@@ -205,17 +207,17 @@
   <body>
     <div id="wrapper">
       <div id="information">
-        <img id="preview" src="imgs/1.2-metre-swiss.jpg">
+        <img id="preview" src="imgs/LaSillaCropped.jpg">
         <div id="text-wrapper">
           <div id="video-wrapper">
           <video id="video" width="200" height="120" controls>
-              <source src="videos/1.2-metre-swiss.mp4" type="video/mp4">
-              <source src="videos/1.2-metre-swiss.mp4" type="video/ogg">
+              <source src="none" type="video/mp4">
+              <source src="none" type="video/ogg">
             Your browser does not support the video tag.
             </video>
           </div>
-          <h1 id="title">Swiss 1.2-metre Leonhard Euler Telescope</h1>
-          <p id="content">The Swiss 1.2-metre Leonhard Euler Telescope at La Silla was built and is operated by the Geneva Observatory, Université de Genève (Switzerland) and named in honour of the famous Swiss mathematician Leonhard Euler (1707–83). It is used in conjunction with the CORALIE spectrograph to conduct high precision radial velocity measurements principally to search for large exoplanets in the southern celestial hemisphere. Its first success was the discovery of a planet in orbit around the star Gliese 86 (eso9855). Other observing programmes focus on variable stars, astroseismology, the follow-up of gamma-ray bursts, monitoring of active galactic nuclei and gravitational lenses. The CORALIE spectrograph, which began operations in June 1998, was developed through a collaboration between the Geneva Observatory and the Haute Provence Observatory (OHP) in France. It is an improved version of the ELODIE spectrograph now in operation at OHP, and with which the first exoplanet was found around the star 51 Pegasi, in 1995. CORALIE is so accurate that it can measure the motion of a star with a precision better than 7 m/s or 25 km/hour, which is about the speed of a very fast human runner!</p>
+          <h1 id="title">Welcome to the La Silla Observatory</h1>
+          <p id="content">The La Silla Observatory is located on the outskirts of the Chilean Atacama Desert, 600 km north of Santiago de Chile and at an altitude of 2400 metres. Like other observatories in this geographical area, La Silla is located far from sources of light pollution and, like the Paranal Observatory, home to the Very Large Telescope, it has one of the darkest night skies on the Earth. La Silla has been an ESO stronghold since the 1960s. Here, ESO operates two of the most productive 4-metre class telescopes in the world.</p>
         </div>
       </div>
       <div id="vrCanvasID"></div>
@@ -226,8 +228,8 @@
         type: "equirectangular",
         showControls: false,
         panorama: "imgs/LaSilla-small.png",
-        //"hotSpotDebug": true,
-        title: "A spectacle over ESO's La Silla",
+        //hotSpotDebug: true,
+        title: "ESO's La Silla Observatory",
         author: "by Lillian Raphael",
         // "autoRotate": 0,
         minPitch : -25,
@@ -269,13 +271,34 @@
             clickHandlerFunc: getInformation,
             clickHandlerArgs: "imgs/1.2-metre-swiss.jpg|videos/1.2-metre-swiss.mp4|Swiss 1.2-metre Leonhard Euler Telescope|The Swiss 1.2-metre Leonhard Euler Telescope at La Silla was built and is operated by the Geneva Observatory, Université de Genève (Switzerland) and named in honour of the famous Swiss mathematician Leonhard Euler (1707–83). It is used in conjunction with the CORALIE spectrograph to conduct high precision radial velocity measurements principally to search for large exoplanets in the southern celestial hemisphere. Its first success was the discovery of a planet in orbit around the star Gliese 86 (eso9855). Other observing programmes focus on variable stars, astroseismology, the follow-up of gamma-ray bursts, monitoring of active galactic nuclei and gravitational lenses. The CORALIE spectrograph, which began operations in June 1998, was developed through a collaboration between the Geneva Observatory and the Haute Provence Observatory (OHP) in France. It is an improved version of the ELODIE spectrograph now in operation at OHP, and with which the first exoplanet was found around the star 51 Pegasi, in 1995. CORALIE is so accurate that it can measure the motion of a star with a precision better than 7 m/s or 25 km/hour, which is about the speed of a very fast human runner!",
           },
+          {
+            cssClass: "custom-hotspot",
+            pitch: -11.44,
+            yaw: 49.82,
+            type: "info",
+            text: "Petroglyphs around La Silla",
+            clickHandlerFunc: getInformation,
+            clickHandlerArgs: "imgs/petroglyph.jpg|none|Swiss 1.2-metre Leonhard Euler Telescope|A full Moon bathes the rocky desert landscape surrounding ESO's La Silla Observatory in a faint white light. Rocks littered around the Chilean site are covered with ancient drawings — petroglyphs — carved into the stone. Marks such as these cup-shaped examples are found all over the world and can help provide insights into the ancient civilisations that once called these places home.",
+          },
         ],
       });
 
       function getInformation(name, args) {
         var array = args.split('|');
+        var video = document.getElementById("video")
+        
         document.getElementById("preview").src = array[0];
-        document.getElementById("video").src = array[1];
+        
+        if (array[1] == "none") {
+          video.style.opacity = "0";
+          video.style.pointerEvents = "none";
+        }
+        else {
+          video.src = array[1];
+          video.style.opacity = "1";
+          video.style.pointerEvents = "auto";
+        }
+        
         document.getElementById("title").innerHTML = array[2];
         document.getElementById("content").innerHTML = array[3];
       }
