@@ -8,6 +8,7 @@
     <script type="application/javascript" src="js/pannellum.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Preload MEDIA -->
     <link rel="preload" as="image" href="imgs/LaSilla-small.png" />
     <style>
@@ -40,7 +41,17 @@
       }
 
       #text-wrapper {
-        transform: translateY(-90px);
+        transform: translateY(-220px);
+      }
+
+      #video-wrapper {
+        text-align: right;
+      }
+
+      #video {
+        border-style: solid;
+        border-color: white;
+        background-color: #000;
       }
 
       #title {
@@ -95,6 +106,7 @@
         width: 30px;
         background: #ff4500;
         border-radius: 50%;
+        z-index: 2;
       }
 
       .custom-hotspot-cool {
@@ -190,6 +202,13 @@
       <div id="information">
         <img id="preview" src="imgs/1.2-metre-swiss.jpg">
         <div id="text-wrapper">
+          <div id="video-wrapper">
+          <video id="video" width="200" height="120" controls>
+              <source src="videos/jwtIntro.m4v" type="video/mp4">
+              <source src="videos/jwtIntro.m4v" type="video/ogg">
+            Your browser does not support the video tag.
+            </video>
+          </div>
           <h1 id="title">Swiss 1.2-metre Leonhard Euler Telescope</h1>
           <p id="content">The Swiss 1.2-metre Leonhard Euler Telescope at La Silla was built and is operated by the Geneva Observatory, Université de Genève (Switzerland) and named in honour of the famous Swiss mathematician Leonhard Euler (1707–83). It is used in conjunction with the CORALIE spectrograph to conduct high precision radial velocity measurements principally to search for large exoplanets in the southern celestial hemisphere. Its first success was the discovery of a planet in orbit around the star Gliese 86 (eso9855). Other observing programmes focus on variable stars, astroseismology, the follow-up of gamma-ray bursts, monitoring of active galactic nuclei and gravitational lenses. The CORALIE spectrograph, which began operations in June 1998, was developed through a collaboration between the Geneva Observatory and the Haute Provence Observatory (OHP) in France. It is an improved version of the ELODIE spectrograph now in operation at OHP, and with which the first exoplanet was found around the star 51 Pegasi, in 1995. CORALIE is so accurate that it can measure the motion of a star with a precision better than 7 m/s or 25 km/hour, which is about the speed of a very fast human runner!</p>
         </div>
@@ -200,11 +219,11 @@
     <script type="application/javascript">
       pannellum.viewer("vrCanvasID", {
         type: "equirectangular",
-        showControls: true,
+        showControls: false,
         panorama: "imgs/LaSilla-small.png",
         //"hotSpotDebug": true,
-        title: "A spectacle over La Silla",
-        author: "European Southern Observatory",
+        title: "A spectacle over ESO's La Silla",
+        author: "by Lillian Raphael",
         // "autoRotate": 0,
         minPitch : -25,
         maxPitch : 25,
@@ -225,7 +244,7 @@
             type: "info",
             text: "ESO 3.6-metre telescope",
             clickHandlerFunc: getInformation,
-            clickHandlerArgs: "imgs/3.6-metre.jpg|ESO 3.6-metre telescope|The ESO 3.6-metre telescope started operations in 1977 and set Europe the exciting engineering challenge of constructing and operating a telescope in the 3–4-metre class in the Southern Hemisphere. Over the years, the ESO 3.6-metre telescope has been constantly upgraded, including the installation of a new secondary mirror that has kept the telescope in its place as one of the most efficient and productive engines of astronomical research. The telescope hosts HARPS, the High Accuracy Radial velocity Planet Searcher, the world's foremost exoplanet hunter. HARPS is a spectrograph with unrivalled precision and is the most successful finder of low-mass exoplanets to date.",
+            clickHandlerArgs: "imgs/3.6-metre.jpg|videos/3.6-metre.mp4|ESO 3.6-metre telescope|The ESO 3.6-metre telescope started operations in 1977 and set Europe the exciting engineering challenge of constructing and operating a telescope in the 3–4-metre class in the Southern Hemisphere. Over the years, the ESO 3.6-metre telescope has been constantly upgraded, including the installation of a new secondary mirror that has kept the telescope in its place as one of the most efficient and productive engines of astronomical research. The telescope hosts HARPS, the High Accuracy Radial velocity Planet Searcher, the world's foremost exoplanet hunter. HARPS is a spectrograph with unrivalled precision and is the most successful finder of low-mass exoplanets to date.",
           },
           {
             cssClass: "custom-hotspot",
@@ -234,7 +253,7 @@
             type: "info",
             text: "Swedish–ESO Submillimetre Telescope (decommissioned)",
             clickHandlerFunc: getInformation,
-            clickHandlerArgs: "imgs/Swedish-ESO.jpg|Swedish–ESO Submillimetre Telescope (decommissioned)|The Swedish–ESO Submillimetre Telescope (SEST) was built on behalf of the Swedish Natural Science Research Council (NFR) and ESO. It was the only large sub-millimetre telescope in the southern hemisphere at the time of first light. It is very similar to the IRAM telescopes on the Plateau de Bure in France. SEST was decommissioned in 2003, and is superseded by APEX, and ALMA, on Chajnantor.",
+            clickHandlerArgs: "imgs/Swedish-ESO.jpg|videos/Swedish-ESO.m4v|Swedish–ESO Submillimetre Telescope (decommissioned)|The Swedish–ESO Submillimetre Telescope (SEST) was built on behalf of the Swedish Natural Science Research Council (NFR) and ESO. It was the only large sub-millimetre telescope in the southern hemisphere at the time of first light. It is very similar to the IRAM telescopes on the Plateau de Bure in France. SEST was decommissioned in 2003, and is superseded by APEX, and ALMA, on Chajnantor.",
           },
           {
             cssClass: "custom-hotspot",
@@ -243,17 +262,17 @@
             type: "info",
             text: "Swiss 1.2-metre Leonhard Euler Telescope",
             clickHandlerFunc: getInformation,
-            clickHandlerArgs: "imgs/1.2-metre-swiss.jpg|Swiss 1.2-metre Leonhard Euler Telescope|The Swiss 1.2-metre Leonhard Euler Telescope at La Silla was built and is operated by the Geneva Observatory, Université de Genève (Switzerland) and named in honour of the famous Swiss mathematician Leonhard Euler (1707–83). It is used in conjunction with the CORALIE spectrograph to conduct high precision radial velocity measurements principally to search for large exoplanets in the southern celestial hemisphere. Its first success was the discovery of a planet in orbit around the star Gliese 86 (eso9855). Other observing programmes focus on variable stars, astroseismology, the follow-up of gamma-ray bursts, monitoring of active galactic nuclei and gravitational lenses. The CORALIE spectrograph, which began operations in June 1998, was developed through a collaboration between the Geneva Observatory and the Haute Provence Observatory (OHP) in France. It is an improved version of the ELODIE spectrograph now in operation at OHP, and with which the first exoplanet was found around the star 51 Pegasi, in 1995. CORALIE is so accurate that it can measure the motion of a star with a precision better than 7 m/s or 25 km/hour, which is about the speed of a very fast human runner!",
+            clickHandlerArgs: "imgs/1.2-metre-swiss.jpg|videos/1.2-metre-swiss.mp4|Swiss 1.2-metre Leonhard Euler Telescope|The Swiss 1.2-metre Leonhard Euler Telescope at La Silla was built and is operated by the Geneva Observatory, Université de Genève (Switzerland) and named in honour of the famous Swiss mathematician Leonhard Euler (1707–83). It is used in conjunction with the CORALIE spectrograph to conduct high precision radial velocity measurements principally to search for large exoplanets in the southern celestial hemisphere. Its first success was the discovery of a planet in orbit around the star Gliese 86 (eso9855). Other observing programmes focus on variable stars, astroseismology, the follow-up of gamma-ray bursts, monitoring of active galactic nuclei and gravitational lenses. The CORALIE spectrograph, which began operations in June 1998, was developed through a collaboration between the Geneva Observatory and the Haute Provence Observatory (OHP) in France. It is an improved version of the ELODIE spectrograph now in operation at OHP, and with which the first exoplanet was found around the star 51 Pegasi, in 1995. CORALIE is so accurate that it can measure the motion of a star with a precision better than 7 m/s or 25 km/hour, which is about the speed of a very fast human runner!",
           },
         ],
       });
 
       function getInformation(name, args) {
         var array = args.split('|');
-        console.log(array[0]);
         document.getElementById("preview").src = array[0];
-        document.getElementById("title").innerHTML = array[1];
-        document.getElementById("content").innerHTML = array[2];
+        document.getElementById("video").src = array[1];
+        document.getElementById("title").innerHTML = array[2];
+        document.getElementById("content").innerHTML = array[3];
       }
 
       /*
